@@ -1,6 +1,6 @@
 import React from "react";
 import { Stack } from "expo-router";
-import { Text } from "react-native";
+import "../global.css";
 
 const RootLayout = () => {
   return (
