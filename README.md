@@ -44,3 +44,36 @@ You can start developing by editing the files inside the **app** directory. This
 NativeWind helps use the full power of Tailwind CSS in React Native
 
 Follow [documentation](https://www.nativewind.dev/getting-started/expo-router) to set up NativeWind
+
+## Expo API
+
+### useFonts()
+
+To load and use custom fonts
+
+```javascript
+import { useFonts } from "expo-font";
+
+const [fontsLoaded, error] = useFonts({
+  "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
+});
+```
+
+### SplashScreen
+
+Add this directive at the top of `@/_layout.tsx` to make the native splash screen (configured in app.json) remain visible until hideAsync is called.
+
+```javascript
+import { SplashScreen } from "expo-router";
+
+SplashScreen.preventAutoHideAsync();
+```
+
+Hide the splash screen once all fonts have been successfult loaded
+
+```javascript
+  useEffect(() => {
+    if (error) throw Error;
+    if (fontsLoaded) SplashScreen.hideAsync();
+  }, [fontsLoaded, error]);
+```∫
