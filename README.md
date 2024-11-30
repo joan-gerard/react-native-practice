@@ -35,5 +35,5 @@ You can start developing by editing the files inside the **app** directory. This
 
 NativeWind helps use the full power of Tailwind CSS in React Native
 
-Follow [documentation](https://www.nativewind.dev/getting-started/expo-router) to set up Tailwind CSS
+Follow [documentation](https://www.nativewind.dev/getting-started/expo-router) to set up NativeWind
 
