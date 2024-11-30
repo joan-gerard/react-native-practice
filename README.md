@@ -49,9 +49,11 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-}```
+}
+```
 
 global.css
+
 ```javascript
 @tailwind base;
 @tailwind components;
