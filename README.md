@@ -1,4 +1,4 @@
-# Welcome to your Expo app 👋
+# React Native & Expo
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
@@ -13,7 +13,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 2. Start the app
 
    ```bash
-    npx expo start
+    npx expo start -c
    ```
 
 In the output, you'll find options to open the app in a
@@ -25,27 +25,35 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
+## Tools and Packages
 
-When you're ready, run:
+### NativeWind
 
 ```bash
-npm run reset-project
+ npx install nativewind tailwindcss
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+NativeWind helps use the full power of Tailwind CSS in React Native
 
-## Learn more
+Setup Tailwind CSS
 
-To learn more about developing your project with Expo, look at the following resources:
+tailwind.config.js
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+````javascript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  // NOTE: Update this to include the paths to all of your component files.
+  content: ["./app/**/*.{js,jsx,ts,tsx}"],
+  presets: [require("nativewind/preset")],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}```
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-# react-native-practice
+global.css
+```javascript
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+````
