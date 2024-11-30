@@ -37,8 +37,7 @@ NativeWind helps use the full power of Tailwind CSS in React Native
 
 Setup Tailwind CSS
 
-tailwind.config.js
-
+>tailwind.config.js
 ```javascript
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -52,8 +51,7 @@ module.exports = {
 }
 ```
 
-global.css
-
+> global.css
 ```javascript
 @tailwind base;
 @tailwind components;
