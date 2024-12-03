@@ -65,8 +65,92 @@ SplashScreen.preventAutoHideAsync();
 Hide the splash screen once all fonts have been successfult loaded
 
 ```javascript
-  useEffect(() => {
-    if (error) throw Error;
-    if (fontsLoaded) SplashScreen.hideAsync();
-  }, [fontsLoaded, error]);
+useEffect(() => {
+  if (error) throw Error;
+  if (fontsLoaded) SplashScreen.hideAsync();
+}, [fontsLoaded, error]);
 ```
+
+## Backend: Auth and Databases
+
+Backend is handled through Appwrite, an open-source platform that seamlessly integrates with modern technologies and frameworks
+
+### Auth
+
+Auth is enabled by default after creating a project
+
+```javascript
+import { Client, Account, ID } from "react-native-appwrite";
+
+// Init your React Native SDK
+const client = new Client();
+
+client
+  .setEndpoint(appwriteConfig.endpoint) // Your Appwrite Endpoint
+  .setProject(appwriteConfig.projectId) // Your project ID
+  .setPlatform(appwriteConfig.platform); // Your application ID or bundle ID.
+
+const account = new Account(client);
+
+export const createUser = async (
+  email: string,
+  password: string,
+  username: string
+) => {
+  const newAccount = await account.create(
+    ID.unique(),
+    email,
+    password,
+    username
+  );
+
+  if (!newAccount) throw Error;
+
+  await signIn(email, password);
+
+  const newUser = await databases.createDocument(
+    appwriteConfig.databaseId,
+    appwriteConfig.userCollectionId,
+    ID.unique(),
+    {
+      accountId: newAccount.$id,
+      username,
+      email,
+    }
+  );
+
+  return newUser;
+};
+
+export async function signIn(email: string, password: string) {
+  try {
+    const session = await account.createEmailPasswordSession(email, password);
+    return session;
+  } catch (error) {
+    console.log(error);
+    throw Error;
+  }
+}
+```
+
+### Database
+
+Set up a database inside your Appwrite project. Then create the needed collections, ie users and videos for this app.
+For each collection, you need to create attributes (similar to a schema). For each collection, in settings, you need to enable permissions.
+
+```javascript
+const newUser = await databases.createDocument(
+  appwriteConfig.databaseId,
+  appwriteConfig.userCollectionId,
+  ID.unique(),
+  {
+    accountId: newAccount.$id,
+    username,
+    email,
+  }
+);
+```
+
+### Storage
+
+Create a bucket, give it a name and set permissions

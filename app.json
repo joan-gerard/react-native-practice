@@ -13,7 +13,8 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.joan.gerard.aora"
+      "bundleIdentifier": "com.joan.gerard.aora",
+      "package": "com.joan.gerard.aora"
     },
     "android": {
       "adaptiveIcon": {
