@@ -98,8 +98,6 @@ export async function getCurrentUser() {
 
 export async function logout() {
   const allSessions = await account.listSessions();
-  console.log("SESSIONS", allSessions);
   const currentLoggedInUser = await account.get();
-  console.log("currentLoggedInUser", currentLoggedInUser);
   // await account.deleteSession(currentLoggedInUser.$id)
 }
