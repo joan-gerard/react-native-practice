@@ -101,3 +101,16 @@ export async function logout() {
   const currentLoggedInUser = await account.get();
   // await account.deleteSession(currentLoggedInUser.$id)
 }
+
+export const getAllPosts = async () => {
+  try {
+    const allPosts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.videoCollectionId
+    );
+
+    return allPosts.documents;
+  } catch (error) {
+    console.log(error);
+  }
+};
