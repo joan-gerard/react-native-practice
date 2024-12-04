@@ -151,6 +151,15 @@ const newUser = await databases.createDocument(
 );
 ```
 
+```javascript
+const currentLoggedInUser = await account.get();
+const currentUser = await databases.listDocuments(
+  appwriteConfig.databaseId,
+  appwriteConfig.userCollectionId,
+  [Query.equal("accountId", currentLoggedInUser.$id)]
+);
+```
+
 ### Storage
 
 Create a bucket, give it a name and set permissions
