@@ -114,3 +114,16 @@ export const getAllPosts = async () => {
     console.log(error);
   }
 };
+export const getTrendingPosts = async () => {
+  try {
+    const allPosts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.videoCollectionId,
+      [Query.orderDesc("$createdAt"), Query.limit(7)]
+    );
+
+    return allPosts.documents;
+  } catch (error) {
+    console.log(error);
+  }
+};

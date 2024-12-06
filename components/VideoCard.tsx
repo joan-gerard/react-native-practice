@@ -1,6 +1,8 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, Button } from "react-native";
 import React, { useState } from "react";
 import { icons } from "@/constants";
+import { useVideoPlayer, VideoView } from "expo-video";
+import { useEvent } from "expo";
 
 const VideoCard = ({ videoData }: any) => {
   const {
@@ -10,9 +12,20 @@ const VideoCard = ({ videoData }: any) => {
     video,
   } = videoData;
 
-  console.log({ title, thumbnail, username, avatar, video });
-
   const [play, setPlay] = useState(false);
+
+  const player = useVideoPlayer(
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    (player) => {
+      player.loop = true;
+      player.play();
+    }
+  );
+
+  const { isPlaying } = useEvent(player, "playingChange", {
+    isPlaying: player.playing,
+  });
+
   return (
     <View className="flex-col items-center px-4 mb-14">
       <View className="flex-row gap-3 items-start">
@@ -45,7 +58,26 @@ const VideoCard = ({ videoData }: any) => {
       </View>
 
       {play ? (
-        <Text className="text-white">playing</Text>
+        <View className="flex-1 p-[10px] items-center justify-between px-3">
+          <VideoView
+            player={player}
+            className="w-52 h-52 bg-red-400 mt-3 rounded-[35px]"
+            allowsFullscreen
+            allowsPictureInPicture
+          />
+          <View className="p-5">
+            <Button
+              title={isPlaying ? "Pause" : "Play"}
+              onPress={() => {
+                if (isPlaying) {
+                  player.pause();
+                } else {
+                  player.play();
+                }
+              }}
+            />
+          </View>
+        </View>
       ) : (
         <TouchableOpacity
           activeOpacity={0.7}

@@ -1,12 +1,5 @@
-import {
-  View,
-  Text,
-  FlatList,
-  Image,
-  RefreshControl,
-  Alert,
-} from "react-native";
-import React, { useEffect, useState } from "react";
+import { View, Text, FlatList, Image, RefreshControl } from "react-native";
+import React, { useState } from "react";
 import { useGlobalContext } from "@/context/globalProvider";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -14,9 +7,10 @@ import { images } from "@/constants";
 import SearchInput from "@/components/SearchInput";
 import Trending from "@/components/Trending";
 import EmptyState from "@/components/EmptyState";
-import { getAllPosts } from "@/lib/appwrite";
+import { getAllPosts, getTrendingPosts } from "@/lib/appwrite";
 import useAppwrite from "@/lib/useAppwrite";
 import VideoCard from "@/components/VideoCard";
+import { Post } from "@/types/global";
 
 const Home = () => {
   const { user } = useGlobalContext();
@@ -24,6 +18,7 @@ const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
 
   const { data: posts, refetch } = useAppwrite(getAllPosts);
+  const { data: trendingPosts } = useAppwrite(getTrendingPosts);
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -67,7 +62,7 @@ const Home = () => {
               <Text className="text-gray-100 text-lg font-pregular mb-3">
                 Latest Videos
               </Text>
-              <Trending posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []} />
+              <Trending posts={trendingPosts} />
             </View>
           </View>
         )}
