@@ -79,10 +79,8 @@ export async function signIn(email: string, password: string) {
 }
 export async function signOut() {
   try {
-    console.log("ACCOUNT", account);
-    const session = await account.getSession("<SESSION_ID>");
-    console.log("session", session);
-    // return session;
+    const session = await account.deleteSession("current");
+    return session;
   } catch (error) {
     console.log(error);
     throw Error;

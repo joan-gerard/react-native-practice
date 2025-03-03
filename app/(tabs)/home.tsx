@@ -10,11 +10,9 @@ import EmptyState from "@/components/EmptyState";
 import { getAllPosts, getTrendingPosts } from "@/lib/appwrite";
 import useAppwrite from "@/lib/useAppwrite";
 import VideoCard from "@/components/VideoCard";
-import { Post } from "@/types/global";
 
 const Home = () => {
   const { user } = useGlobalContext();
-  const [searchItem, setSearchItem] = useState("");
   const [refreshing, setRefreshing] = useState(false);
 
   const { data: posts, refetch } = useAppwrite(getAllPosts);
@@ -25,6 +23,9 @@ const Home = () => {
     await refetch();
     setRefreshing(false);
   };
+
+  console.log("HOMEPAGE");
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList

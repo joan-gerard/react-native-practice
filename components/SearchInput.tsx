@@ -13,7 +13,6 @@ import { router, usePathname } from "expo-router";
 
 const SearchInput = ({initialQuery}: {initialQuery?: string}) => {
   const pathname = usePathname();
-  console.log({ pathname });
 
   const [query, setQuery] = useState(initialQuery || "");
   return (
