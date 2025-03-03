@@ -77,6 +77,17 @@ export async function signIn(email: string, password: string) {
     throw Error;
   }
 }
+export async function signOut() {
+  try {
+    console.log("ACCOUNT", account);
+    const session = await account.getSession("<SESSION_ID>");
+    console.log("session", session);
+    // return session;
+  } catch (error) {
+    console.log(error);
+    throw Error;
+  }
+}
 
 export async function getCurrentUser() {
   try {
@@ -95,12 +106,6 @@ export async function getCurrentUser() {
   } catch (error) {
     console.log(error);
   }
-}
-
-export async function logout() {
-  const allSessions = await account.listSessions();
-  const currentLoggedInUser = await account.get();
-  // await account.deleteSession(currentLoggedInUser.$id)
 }
 
 export const getAllPosts = async () => {
@@ -137,6 +142,19 @@ export const searchPosts = async (query: string) => {
       [Query.search("title", query)]
     );
 
+    return posts.documents;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserPosts = async (userId: any) => {
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.videoCollectionId,
+      [Query.equal("users", userId)]
+    );
     return posts.documents;
   } catch (error) {
     console.log(error);
