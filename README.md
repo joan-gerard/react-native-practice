@@ -52,6 +52,10 @@ const [fontsLoaded, error] = useFonts({
 });
 ```
 
+### useLocalSearchParams()
+
+Returns the URL parameters for the contextually focused route. Useful for stacks where you may push a new screen that changes the query parameters. For dynamic routes, both the route parameters and the search parameters are returned.
+
 ### SplashScreen
 
 Add this directive at the top of `@/_layout.tsx` to make the native splash screen (configured in app.json) remain visible until hideAsync is called.

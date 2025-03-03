@@ -25,6 +25,7 @@ client
   .setProject(appwriteConfig.projectId) // Your project ID
   .setPlatform(appwriteConfig.platform); // Your application ID or bundle ID.
 
+// Instances
 const account = new Account(client);
 const avatars = new Avatars(client);
 const databases = new Databases(client);
@@ -123,6 +124,20 @@ export const getTrendingPosts = async () => {
     );
 
     return allPosts.documents;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const searchPosts = async (query: string) => {
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.videoCollectionId,
+      [Query.search("title", query)]
+    );
+
+    return posts.documents;
   } catch (error) {
     console.log(error);
   }

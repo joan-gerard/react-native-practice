@@ -28,40 +28,11 @@ const VideoCard = ({ videoData }: any) => {
 
   return (
     <View className="flex-col items-center px-4 mb-14">
-      <View className="flex-row gap-3 items-start">
-        <View className="justify-center items-center flex-1 flex-row">
-          <View className="w-[46px] h-[46px] rounded-lg border border-secondary justify-center items-center">
-            <Image
-              source={{ uri: avatar }}
-              className="w-full h-full rounded-lg"
-              resizeMode="cover"
-            />
-          </View>
-          <View className="justify-center flex-1 ml-3 gap-1">
-            <Text
-              className="text-white font-psemibold text-sm"
-              numberOfLines={1}
-            >
-              {title}
-            </Text>
-            <Text
-              className="text-xs text-gray-100 font-pregular"
-              numberOfLines={1}
-            >
-              {username}
-            </Text>
-          </View>
-        </View>
-        <View className="pt-2">
-          <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
-        </View>
-      </View>
-
       {play ? (
         <View className="flex-1 p-[10px] items-center justify-between px-3">
           <VideoView
             player={player}
-            className="w-52 h-52 bg-red-400 mt-3 rounded-[35px]"
+            className="w-52 h-52 bg-red-400 rounded-[35px]"
             allowsFullscreen
             allowsPictureInPicture
           />
@@ -96,6 +67,34 @@ const VideoCard = ({ videoData }: any) => {
           />
         </TouchableOpacity>
       )}
+      <View className="flex-row gap-3 items-start mt-4">
+        <View className="justify-center items-center flex-1 flex-row">
+          <View className="w-[46px] h-[46px] rounded-lg border border-secondary justify-center items-center">
+            <Image
+              source={{ uri: avatar }}
+              className="w-full h-full rounded-lg"
+              resizeMode="cover"
+            />
+          </View>
+          <View className="justify-center flex-1 ml-3 gap-1">
+            <Text
+              className="text-white font-psemibold text-sm"
+              numberOfLines={1}
+            >
+              {title}
+            </Text>
+            <Text
+              className="text-xs text-gray-100 font-pregular"
+              numberOfLines={1}
+            >
+              {username}
+            </Text>
+          </View>
+        </View>
+        <View className="pt-2">
+          <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
+        </View>
+      </View>
     </View>
   );
 };

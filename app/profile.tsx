@@ -3,9 +3,10 @@ import React from "react";
 
 const Profile = () => {
   return (
-    <SafeAreaView>
-      <Text className="bg-red-500">Profile!</Text>
-    </SafeAreaView>
+    <></>
+    // <SafeAreaView>
+    //   <Text className="bg-red-500">Profile!</Text>
+    // </SafeAreaView>
   );
 };
 
