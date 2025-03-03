@@ -8,8 +8,8 @@ const InfoBox = ({
   titleStyles,
 }: {
   title: string;
-  subtitle: string;
-  containerStyles: string;
+  subtitle?: string;
+  containerStyles?: string;
   titleStyles: string;
 }) => {
   return (
